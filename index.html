@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Saurabh & Snehal | Reception Invitation</title>
+<meta name="description" content="You're invited to the reception of Saurabh & Snehal — Monday, 06 July 2026, 7:00 PM onwards, Shubhamangal Karyalay, Gorakshan Road, Akola.">
+<meta property="og:title" content="Saurabh & Snehal | Reception Invitation">
+<meta property="og:description" content="You're invited to the reception of Saurabh & Snehal — Monday, 06 July 2026, 7:00 PM onwards, Akola.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ivory:#FBF6EC;
+    --ivory-deep:#F3EAD6;
+    --beige:#EADFC4;
+    --gold:#C9A35C;
+    --gold-bright:#E9C870;
+    --gold-deep:#8B6B2E;
+    --maroon:#5C0E1A;
+    --maroon-deep:#3D070F;
+    --ink:#2A1810;
+    --ink-soft:#5C4632;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .serif{font-family:'Cormorant Garamond',serif;}
+  .script{font-family:'Great Vibes',cursive;}
+
+  /* ===== reduced motion ===== */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* ===================== AMBIENT GOLD PARTICLES ===================== */
+  #particle-canvas{
+    position:fixed; inset:0; width:100%; height:100%;
+    pointer-events:none; z-index:5; mix-blend-mode:multiply;
+  }
+
+  /* ===================== PETALS ===================== */
+  .petal{
+    position:fixed; top:-5vh; z-index:6; pointer-events:none;
+    opacity:0.85; will-change:transform;
+  }
+
+  /* ===================== ENVELOPE-OPEN OVERLAY (signature) ===================== */
+  #scroll-overlay{
+    position:fixed; inset:0; z-index:1000;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:34px;
+    background:radial-gradient(circle at 50% 40%, rgba(92,14,26,0.95), var(--maroon-deep) 80%);
+    perspective:1800px;
+  }
+
+  #envelope{
+    position:relative;
+    width:min(86vw, 380px);
+    aspect-ratio:3/2;
+    transition:transform 1.1s cubic-bezier(.65,0,.35,1) 0.9s, opacity 0.7s ease 1.6s;
+  }
+  #scroll-overlay.opening #envelope{ transform:scale(0.82) translateY(40px); opacity:0; }
+
+  /* envelope back/body */
+  .env-body{
+    position:absolute; inset:0;
+    background:linear-gradient(155deg, var(--ivory-deep) 0%, var(--beige) 100%);
+    border:1px solid var(--gold);
+    border-radius:4px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(233,200,112,0.25);
+    overflow:hidden;
+  }
+  .env-body::before{
+    /* subtle inner pocket shading */
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 55%, rgba(92,14,26,0.06) 100%);
+  }
+  .env-body .env-monogram-center{
+    position:absolute; left:50%; top:62%; transform:translate(-50%,-50%);
+    font-family:'Cormorant Garamond',serif; font-weight:500; letter-spacing:1px;
+    color:var(--gold-deep); font-size:0.95rem; text-align:center; opacity:0.85;
+  }
+
+  /* the triangular flap, hinged at top, folds open like a real envelope */
+  .env-flap{
+    position:absolute; top:0; left:0; width:100%; height:58%;
+    transform-origin:top center;
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+    background:linear-gradient(165deg, var(--gold-bright) 0%, var(--gold) 45%, var(--gold-deep) 100%);
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    transition:transform 1s cubic-bezier(.65,0,.35,1) 0.05s;
+    z-index:3;
+  }
+  .env-flap::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(165deg, rgba(255,255,255,0.18), transparent 60%);
+  }
+  #scroll-overlay.opening .env-flap{
+    transform:rotateX(180deg);
+  }
+
+  /* gold wax-seal button sitting on the flap point */
+  #scroll-seal{
+    position:absolute; left:50%; top:46%; transform:translate(-50%,-50%);
+    width:78px; height:78px; border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, var(--gold-bright), var(--gold-deep) 78%);
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35), 0 0 26px rgba(233,200,112,0.55);
+    font-family:'Cormorant Garamond',serif; font-weight:600; color:var(--maroon-deep);
+    font-size:1.3rem; letter-spacing:0.5px;
+    cursor:pointer;
+    border:2px solid rgba(92,14,26,0.5);
+    z-index:5;
+    transition:opacity 0.5s ease, transform 0.5s ease;
+    animation:seal-pulse 2.4s ease-in-out infinite;
+  }
+  #scroll-seal .seal-amp{ font-size:0.7em; line-height:1; opacity:0.85; }
+  #scroll-overlay.opening #scroll-seal{
+    opacity:0; transform:translate(-50%,-50%) scale(0.5);
+    pointer-events:none;
+  }
+  @keyframes seal-pulse{
+    0%,100%{ box-shadow:0 4px 14px rgba(0,0,0,0.35), 0 0 18px rgba(233,200,112,0.45); }
+    50%{ box-shadow:0 4px 14px rgba(0,0,0,0.35), 0 0 32px rgba(233,200,112,0.8); }
+  }
+
+  /* card slides up out of the envelope after the flap opens */
+  .env-card{
+    position:absolute; left:6%; right:6%; bottom:6%;
+    height:78%;
+    background:linear-gradient(180deg, var(--ivory) 0%, var(--ivory-deep) 100%);
+    border:1px solid rgba(201,163,92,0.5);
+    border-radius:3px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:6px;
+    z-index:2;
+    transform:translateY(14%);
+    transition:transform 1s cubic-bezier(.65,0,.35,1) 0.55s;
+  }
+  .env-card .ec-names{ font-family:'Great Vibes',cursive; font-size:1.9rem; color:var(--maroon); line-height:1.3; }
+  .env-card .ec-sub{ font-size:0.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold-deep); }
+  #scroll-overlay.opening .env-card{ transform:translateY(-30%); }
+
+  #scroll-tap-hint{
+    color:var(--gold); font-size:0.7rem; letter-spacing:3px; text-transform:uppercase;
+    opacity:0.8; z-index:1001; transition:opacity .5s ease; white-space:nowrap;
+    margin-top:-10px;
+  }
+  #scroll-overlay.opening #scroll-tap-hint{ opacity:0; }
+  #scroll-overlay.hidden{ visibility:hidden; }
+
+  /* ===================== GOLD DIVIDERS / MOTIFS ===================== */
+  .motif-divider{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    color:var(--gold-deep); margin:0 auto; width:fit-content;
+  }
+  .motif-divider .line{height:1px; width:46px; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .motif-divider svg{width:22px; height:22px; opacity:0.85;}
+
+  section{position:relative; z-index:2;}
+
+  /* ===================== NAV / MONOGRAM (fixed) ===================== */
+  #monogram-fixed{
+    position:fixed; top:18px; left:18px; z-index:50;
+    width:52px; height:52px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold-deep) 80%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond',serif; font-weight:600; color:var(--maroon-deep);
+    font-size:1.1rem; box-shadow:0 4px 14px rgba(91,14,26,0.25);
+    opacity:0; transition:opacity 0.8s ease 0.3s;
+  }
+  body.opened #monogram-fixed{opacity:1;}
+
+  /* ===================== HERO ===================== */
+  #hero{
+    min-height:100vh; min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:90px 24px 60px;
+    position:relative;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(201,163,92,0.18), transparent 55%),
+      linear-gradient(180deg, var(--ivory) 0%, var(--ivory-deep) 100%);
+    overflow:hidden;
+  }
+  #hero-bg-motif{
+    position:absolute; inset:0; opacity:0.5; pointer-events:none;
+  }
+  .hero-eyebrow{
+    font-size:0.78rem; letter-spacing:4px; text-transform:uppercase;
+    color:var(--gold-deep); font-weight:500; opacity:0;
+    animation:fade-up 1s ease forwards; animation-delay:0.2s;
+  }
+  .hero-subline{
+    font-size:0.95rem; color:var(--ink-soft); margin-top:6px; max-width:380px;
+    opacity:0; animation:fade-up 1s ease forwards; animation-delay:0.45s;
+  }
+  #hero-names{
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(3.4rem, 13vw, 6.8rem);
+    font-weight:400;
+    color:var(--maroon);
+    line-height:1.3;
+    padding:0.15em 0.05em 0.1em;
+    margin:14px 0 4px;
+    opacity:0; animation:fade-up 1.1s ease forwards; animation-delay:0.7s;
+    text-shadow:0 2px 14px rgba(201,163,92,0.3);
+    -webkit-font-smoothing:antialiased;
+  }
+  #hero-names .amp{ color:var(--gold-deep); font-size:0.8em; margin:0 0.15em; font-style:italic; font-family:'Cormorant Garamond',serif; }
+  .hero-line{
+    font-size:1rem; color:var(--ink-soft); max-width:420px; margin:14px auto 0;
+    line-height:1.7; opacity:0; animation:fade-up 1s ease forwards; animation-delay:1s;
+  }
+  @keyframes fade-up{ from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+
+  #countdown{
+    display:flex; gap:18px; margin-top:38px; flex-wrap:wrap; justify-content:center;
+    opacity:0; animation:fade-up 1s ease forwards; animation-delay:1.25s;
+  }
+  .cd-unit{
+    width:74px; padding:14px 0 10px;
+    background:rgba(255,255,255,0.55);
+    border:1px solid rgba(201,163,92,0.4);
+    border-radius:4px;
+    backdrop-filter:blur(3px);
+  }
+  .cd-num{font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:600; color:var(--maroon); display:block;}
+  .cd-label{font-size:0.62rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold-deep);}
+
+  .hero-cta-row{
+    display:flex; gap:14px; margin-top:40px; flex-wrap:wrap; justify-content:center;
+    opacity:0; animation:fade-up 1s ease forwards; animation-delay:1.45s;
+  }
+  .btn{
+    padding:13px 30px; border-radius:2px; font-size:0.78rem; letter-spacing:2px;
+    text-transform:uppercase; border:1px solid var(--gold-deep);
+    transition:all 0.35s ease; font-weight:500;
+  }
+  .btn-solid{ background:var(--maroon); color:var(--ivory); border-color:var(--maroon); }
+  .btn-solid:hover{ background:var(--maroon-deep); transform:translateY(-2px); box-shadow:0 8px 20px rgba(92,14,26,0.25); }
+  .btn-outline{ background:transparent; color:var(--maroon); }
+  .btn-outline:hover{ background:var(--maroon); color:var(--ivory); transform:translateY(-2px); }
+
+  #scroll-cue{
+    position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+    font-size:0.62rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold-deep);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    opacity:0; animation:fade-up 1s ease forwards, bob 2.6s ease-in-out infinite 2s;
+    animation-delay:1.7s;
+  }
+  @keyframes bob{ 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);} }
+  #scroll-cue .stem{width:1px; height:26px; background:linear-gradient(180deg, var(--gold), transparent);}
+
+  /* ===================== SECTION SHELL ===================== */
+  .section-pad{ padding:96px 22px; max-width:1080px; margin:0 auto; }
+  .section-head{ text-align:center; margin-bottom:54px; }
+  .section-head .eyebrow{ font-size:0.74rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold-deep); margin-bottom:10px; }
+  .section-head h2{ font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(2.1rem,5vw,3rem); color:var(--maroon); }
+  .section-head p.lede{ color:var(--ink-soft); font-size:0.95rem; max-width:480px; margin:14px auto 0; line-height:1.7; }
+
+  .reveal{ opacity:0; transform:translateY(30px); transition:opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ===================== EVENT CARD (Reception) ===================== */
+  .events-wrap{ background:var(--ivory); padding:96px 22px; }
+  .event-card{
+    max-width:760px; margin:0 auto 60px; position:relative;
+    background:linear-gradient(160deg, #ffffff, var(--ivory-deep));
+    border:1px solid var(--beige); border-radius:10px; overflow:hidden;
+    box-shadow:0 18px 40px rgba(92,14,26,0.08);
+  }
+  .event-card:last-child{ margin-bottom:0; }
+  .event-card.maroon-card{ background:linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%); color:var(--ivory); }
+  .event-banner{
+    padding:26px 32px; display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid rgba(201,163,92,0.3);
+  }
+  .event-card.maroon-card .event-banner{ border-bottom:1px solid rgba(233,200,112,0.25); }
+  .event-banner h3{ font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:600; color:var(--maroon); }
+  .event-card.maroon-card .event-banner h3{ color:var(--gold-bright); }
+  .event-body{ padding:30px 32px 34px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:600px){ .event-body{ grid-template-columns:1fr; } }
+  .event-detail .label{ font-size:0.66rem; letter-spacing:2px; text-transform:uppercase; opacity:0.7; margin-bottom:5px; }
+  .event-detail .value{ font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:500; }
+  .event-detail{ margin-bottom:18px; }
+  .event-actions{ display:flex; gap:10px; padding:0 32px 30px; flex-wrap:wrap; }
+  .btn-sm{ padding:10px 20px; font-size:0.7rem; }
+
+  /* sparkle accent strip on maroon card */
+  .sparkle-strip{ position:absolute; inset:0; pointer-events:none; overflow:hidden; opacity:0.5; }
+  .spark{ position:absolute; width:3px; height:3px; background:var(--gold-bright); border-radius:50%; animation:twinkle 2.6s ease-in-out infinite; }
+  @keyframes twinkle{ 0%,100%{opacity:0.1; transform:scale(0.6);} 50%{opacity:1; transform:scale(1.4);} }
+
+  /* ===================== MAP ===================== */
+  .map-embed{ border-radius:8px; overflow:hidden; border:1px solid rgba(201,163,92,0.4); margin-top:4px; }
+  .map-embed iframe{ width:100%; height:230px; border:0; display:block; filter:saturate(0.85); }
+
+  /* ===================== FOOTER ===================== */
+  footer{
+    background:linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+    color:var(--ivory); text-align:center; padding:80px 24px 50px; position:relative; overflow:hidden;
+  }
+  footer .monogram-foot{
+    width:64px; height:64px; border-radius:50%; margin:0 auto 26px;
+    background:radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold-deep) 80%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond',serif; font-weight:600; color:var(--maroon-deep); font-size:1.3rem;
+  }
+  footer .names-foot{ font-family:'Great Vibes',cursive; font-size:3rem; line-height:1.4; color:var(--gold-bright); margin-bottom:18px; }
+  footer p{ max-width:480px; margin:0 auto; line-height:1.8; font-size:0.95rem; color:rgba(251,246,236,0.85); }
+  footer .fine{ margin-top:34px; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:rgba(233,200,112,0.6); }
+
+  /* utility */
+  .gold-text{ color:var(--gold-deep); }
+</style>
+</head>
+<body>
+
+  <!-- ============ ENVELOPE-OPEN SIGNATURE OVERLAY ============ -->
+  <div id="scroll-overlay">
+    <div id="envelope">
+      <div class="env-card">
+        <div class="ec-names">Saurabh &amp; Snehal</div>
+        <div class="ec-sub">You're Invited</div>
+      </div>
+      <div class="env-body">
+        <div class="env-monogram-center">Reception Invitation</div>
+      </div>
+      <div class="env-flap"></div>
+      <div id="scroll-seal" role="button" tabindex="0" aria-label="Open invitation">
+        <span class="seal-amp">S&amp;S</span>
+      </div>
+    </div>
+    <div id="scroll-tap-hint">Tap the seal to open</div>
+  </div>
+
+  <canvas id="particle-canvas"></canvas>
+  <div id="monogram-fixed">S·S</div>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero">
+    <div class="hero-eyebrow">Together with their families</div>
+    <div id="hero-names">Saurabh<span class="amp">&amp;</span>Snehal</div>
+    <p class="hero-line">request the honour of your presence as they begin<br>their journey together, with blessings and festivity,<br>in the company of those they hold dear.</p>
+
+    <div id="countdown">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Days</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hrs</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Min</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Sec</span></div>
+    </div>
+
+    <div class="hero-cta-row">
+      <a href="#events" class="btn btn-solid">View Celebration Details</a>
+    </div>
+
+    <div id="scroll-cue"><span>Scroll</span><span class="stem"></span></div>
+  </section>
+
+  <!-- ============ EVENTS: RECEPTION ============ -->
+  <div class="events-wrap" id="events">
+    <div class="section-head reveal" style="margin-bottom:60px;">
+      <div class="eyebrow">Celebration Details</div>
+      <h2>Join Us As We Celebrate</h2>
+      <p class="lede">An evening of tradition, blessings, and togetherness.</p>
+    </div>
+
+    <!-- Reception Card -->
+    <div class="event-card maroon-card reveal">
+      <div class="sparkle-strip" id="sparkle-strip"></div>
+      <div class="event-banner">
+        <h3>Reception</h3>
+      </div>
+      <div class="event-body">
+        <div class="event-detail">
+          <div class="label">Date</div>
+          <div class="value">Monday, 06 July 2026</div>
+        </div>
+        <div class="event-detail">
+          <div class="label">Time</div>
+          <div class="value">7:00 PM Onwards</div>
+        </div>
+        <div class="event-detail" style="grid-column:1/-1;">
+          <div class="label">Venue</div>
+          <div class="value">Shubhamangal Karyalay</div>
+          <div style="font-size:0.85rem; opacity:0.8; margin-top:3px;">Gorakshan Road, Akola</div>
+          <div class="map-embed">
+            <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Gorakshan+Road,+Akola&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a class="btn btn-sm" style="background:var(--gold-bright); border-color:var(--gold-bright); color:var(--maroon-deep);" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=Gorakshan+Road,+Akola">Get Directions</a>
+        <button class="btn btn-sm" style="background:transparent; border-color:var(--gold-bright); color:var(--gold-bright);" onclick="addToCalendar()">Add to Calendar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="monogram-foot">S·S</div>
+    <div class="names-foot">Saurabh &amp; Snehal</div>
+    <p>Your presence will make our celebration truly memorable. We look forward to celebrating this joyous occasion with you.</p>
+    <div class="fine">06 July 2026 · Akola</div>
+  </footer>
+
+<script>
+/* =========================================================
+   SCROLL-OPEN SIGNATURE ANIMATION
+========================================================= */
+const overlay = document.getElementById('scroll-overlay');
+const seal = document.getElementById('scroll-seal');
+function openInvitation(){
+  overlay.classList.add('opening');
+  document.body.classList.add('opened');
+  setTimeout(()=>{ overlay.classList.add('hidden'); }, 2400);
+}
+seal.addEventListener('click', openInvitation);
+seal.addEventListener('keypress', (e)=>{ if(e.key==='Enter') openInvitation(); });
+// auto-open shortly after load so it never blocks a user who doesn't notice the seal
+setTimeout(()=>{ if(!overlay.classList.contains('opening')) openInvitation(); }, 4500);
+
+/* =========================================================
+   COUNTDOWN — Reception: 06 July 2026, 7:00 PM IST
+========================================================= */
+const receptionDate = new Date('2026-07-06T19:00:00+05:30').getTime();
+function tickCountdown(){
+  const now = Date.now();
+  const diff = receptionDate - now;
+  const els = {d:document.getElementById('cd-days'),h:document.getElementById('cd-hours'),m:document.getElementById('cd-mins'),s:document.getElementById('cd-secs')};
+  if(diff <= 0){ els.d.textContent='00'; els.h.textContent='00'; els.m.textContent='00'; els.s.textContent='00'; return; }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  els.d.textContent = String(d).padStart(2,'0');
+  els.h.textContent = String(h).padStart(2,'0');
+  els.m.textContent = String(m).padStart(2,'0');
+  els.s.textContent = String(s).padStart(2,'0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:0.15});
+revealEls.forEach(el=>io.observe(el));
+
+/* =========================================================
+   AMBIENT GOLD PARTICLES (canvas, lightweight)
+========================================================= */
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const PARTICLE_COUNT = window.innerWidth < 600 ? 18 : 34;
+const particles = Array.from({length:PARTICLE_COUNT}, ()=>({
+  x: Math.random()*canvas.width,
+  y: Math.random()*canvas.height,
+  r: Math.random()*1.6+0.6,
+  speed: Math.random()*0.25+0.08,
+  drift: (Math.random()-0.5)*0.3,
+  alpha: Math.random()*0.5+0.2,
+  twinkle: Math.random()*0.02+0.005,
+}));
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateParticles(){
+  if(reduceMotion){ return; }
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.y -= p.speed;
+    p.x += p.drift;
+    p.alpha += (Math.random()-0.5)*p.twinkle;
+    p.alpha = Math.max(0.1, Math.min(0.7, p.alpha));
+    if(p.y < -10){ p.y = canvas.height+10; p.x = Math.random()*canvas.width; }
+    if(p.x < -10) p.x = canvas.width+10;
+    if(p.x > canvas.width+10) p.x = -10;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(201,163,92,${p.alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+/* =========================================================
+   FALLING PETALS (ambient, sparse — subtle, not overwhelming)
+========================================================= */
+function spawnPetal(){
+  if(reduceMotion) return;
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+  petal.style.left = Math.random()*100 + 'vw';
+  const size = 10 + Math.random()*10;
+  const duration = 9 + Math.random()*7;
+  const rotateDir = Math.random() > 0.5 ? 1 : -1;
+  petal.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 24 24"><path d="M12 2C8 6 8 10 12 12C16 10 16 6 12 2Z" fill="#C9A35C" opacity="0.7"/></svg>`;
+  document.body.appendChild(petal);
+  const drift = (Math.random()-0.5)*120;
+  petal.animate(
+    [
+      { transform:'translate(0,0) rotate(0deg)', offset:0 },
+      { transform:`translate(${drift}px, 60vh) rotate(${180*rotateDir}deg)`, offset:0.6 },
+      { transform:`translate(${drift*1.4}px, 110vh) rotate(${360*rotateDir}deg)`, offset:1 }
+    ],
+    { duration: duration*1000, easing:'ease-in', fill:'forwards' }
+  );
+  setTimeout(()=>petal.remove(), duration*1000+200);
+}
+if(!reduceMotion){
+  setInterval(spawnPetal, 2200);
+  spawnPetal();
+}
+
+/* =========================================================
+   SPARKLE STRIP on reception card
+========================================================= */
+const strip = document.getElementById('sparkle-strip');
+for(let i=0;i<22;i++){
+  const sp = document.createElement('div');
+  sp.className='spark';
+  sp.style.left = Math.random()*100+'%';
+  sp.style.top = Math.random()*100+'%';
+  sp.style.animationDelay = (Math.random()*2.6)+'s';
+  strip.appendChild(sp);
+}
+
+/* =========================================================
+   ADD TO CALENDAR
+========================================================= */
+function addToCalendar(){
+  const title = 'Saurabh & Snehal — Reception';
+  const start = '20260706T133000Z'; // 19:00 IST -> 13:30 UTC
+  const end   = '20260706T180000Z';
+  const location = 'Shubhamangal Karyalay, Gorakshan Road, Akola';
+  const details = 'Reception of Saurabh & Snehal';
+  const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&location=${encodeURIComponent(location)}&details=${encodeURIComponent(details)}`;
+  window.open(url, '_blank');
+}
+
+/* =========================================================
+   WISHES WALL REMOVED — no longer in use
+========================================================= */
+</script>
+</body>
+</html>
